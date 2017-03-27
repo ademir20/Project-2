@@ -122,7 +122,8 @@ public class MyMouseAdapter extends MouseAdapter {
 		}
 
 	}
-	int flags = 10, numFlags = 0;
+	int flags = 10, numFlags = 0; //flags = cantidad de flags usadas
+								  //numFlags = cantidad de flags disponibles para minas
 
 	public void mouseReleased(MouseEvent e) {
 
@@ -194,7 +195,7 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Released the mouse button on the same cell where it was pressed
 						//						if(!DoesBombExist){
 					if (!(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
-						Color newColor = Color.GREEN;
+						Color newColor = Color.GREEN; //No permitir que el verde pinte encima del rojo (un flag)
 						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;}
 
 						myPanel.repaint();
@@ -260,15 +261,15 @@ public class MyMouseAdapter extends MouseAdapter {
 				//Had pressed inside
 
 				if((myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.WHITE))){
-					myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.RED;				
+					myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.RED;	//Solo permite crear flags en cuadrados blancos			
 					myPanel.repaint();
-					flags--;
+					flags--; //Por cada right click en cuadrado blanco pones un flag blanco por ende hay menos flags disponibles para minas
 					System.out.println("numFlags=" +flags);
 				}else{
 					if ((myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
 						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;				
 						myPanel.repaint();
-						flags++;
+						flags++; // Por cada right click en cuadrado rojo quitas un flag por ende hay mas flags disponibles para minas
 						System.out.println("numFlags=" +flags);
 					}
 				}

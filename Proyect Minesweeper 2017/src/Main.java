@@ -6,7 +6,7 @@ public class Main {
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		myFrame.setSize(340, 380);
 		myFrame.setLocationRelativeTo(null);
-
+//Un panel mas centrado Ademir!
 		MyPanel myPanel = new MyPanel();
 		myFrame.add(myPanel);
 
