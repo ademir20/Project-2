@@ -123,7 +123,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 	}
 
-	public void mouseReleased(MouseEvent e, boolean DoesBombExist) {
+	public void mouseReleased(MouseEvent e) {
 
 		switch (e.getButton()) {
 
@@ -191,20 +191,14 @@ public class MyMouseAdapter extends MouseAdapter {
 					} else {
 
 						//Released the mouse button on the same cell where it was pressed
-						
-						
-	////////////////////////////////////////////////////////////////////////////////
-						//what need to be work on
-	////////////////////////////////////////////////////////////////////////////////					
-						
-						if(!DoesBombExist){
+//						if(!DoesBombExist){
 						
 							Color newColor = Color.GREEN;
 							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 
 							myPanel.repaint();
 
-						}
+//						}
 
 					}
 
@@ -212,61 +206,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 			}
 
-			if(gridX ==0 && gridY == 10){
-
-				for(int i=4;i<=6; i++){
-
-					for(int j=4; j<=6; j++){
-
-						Color newColor = null;
-
-						do{
-
-							switch (generator.nextInt(5)) {
-
-							case 0:
-
-								newColor = Color.YELLOW;
-
-								break;
-
-							case 1:
-
-								newColor = Color.MAGENTA;
-
-								break;
-
-							case 2:
-
-								newColor = Color.BLACK;
-
-								break;
-
-							case 3:
-
-								newColor = new Color(0x964B00);   //Brown (from http://simple.wikipedia.org/wiki/List_of_colors)
-
-								break;
-
-							case 4:
-
-								newColor = new Color(0xB57EDC);   //Lavender (from http://simple.wikipedia.org/wiki/List_of_colors)
-
-								break;
-
-							}
-
-						}while(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(newColor));
-
-						myPanel.colorArray[i][j] = newColor;
-
-						myPanel.repaint();
-
-					}
-
-				}
-
-			}
+		
 
 			myPanel.repaint();
 
@@ -312,19 +252,17 @@ public class MyMouseAdapter extends MouseAdapter {
 
 			gridY = myPanel.getGridY(x, y);
 
-			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
+			if ((myPanel.mouseDownGridX <= 9) || (myPanel.mouseDownGridY <= 9)) {
 
-				//Had pressed outside
-
-				for(int i=1;i<myPanel.colorArray.length; i++){
-
-					for(int j=1; j<myPanel.colorArray.length; j++){
-
-						myPanel.colorArray[i][j] = Color.WHITE;
-
+				//Had pressed inside
+				int flags = 9, numFlags = 0;
+			
+				if(numFlags<flags){
+						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.RED;
 						myPanel.repaint();
-					}
+						numFlags++;
 				}
+				
 			}
 
 			break;
