@@ -9,6 +9,7 @@ public class Mine {
 		this.Col = col;
 	}
 	
+	//verifies if the cell contains a mine
 	public boolean HasBomb(int rowX, int colY)
 	{
 		if(Row == rowX && Col == colY)
