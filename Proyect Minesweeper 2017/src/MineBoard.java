@@ -1,18 +1,21 @@
 import java.util.Random;
 
-public class Mines {
-	Mine[] Mines = new Mine[9];
+public class MineBoard {
+	
+	int mines = 9;
+	
+	Mine[] Mines = new Mine[mines];
 
 
 	// This function positions the bombs in the array.
-	public Mines(){
+	public MineBoard(){
 		
 		// Local Vars
 		int numberMines = 0;
 		Random generator = new Random();
 		
 		// Verification Only
-		Mine[] verifyMines = new Mine[9];
+		Mine[] verifyMines = new Mine[mines];
 		
 		while(numberMines < 10) //create the mines
 		{			
