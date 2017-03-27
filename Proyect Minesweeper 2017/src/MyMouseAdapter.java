@@ -122,6 +122,7 @@ public class MyMouseAdapter extends MouseAdapter {
 		}
 
 	}
+	int flags = 10, numFlags = 0;
 
 	public void mouseReleased(MouseEvent e) {
 
@@ -191,14 +192,14 @@ public class MyMouseAdapter extends MouseAdapter {
 					} else {
 
 						//Released the mouse button on the same cell where it was pressed
-//						if(!DoesBombExist){
-						
-							Color newColor = Color.GREEN;
-							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+						//						if(!DoesBombExist){
+					if (!(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
+						Color newColor = Color.GREEN;
+						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;}
 
-							myPanel.repaint();
+						myPanel.repaint();
 
-//						}
+						//						}
 
 					}
 
@@ -206,11 +207,11 @@ public class MyMouseAdapter extends MouseAdapter {
 
 			}
 
-		
+
 
 			myPanel.repaint();
 
-					break;
+			break;
 
 		case 3:	//Right mouse button
 
@@ -252,17 +253,29 @@ public class MyMouseAdapter extends MouseAdapter {
 
 			gridY = myPanel.getGridY(x, y);
 
+
+
 			if ((myPanel.mouseDownGridX <= 9) || (myPanel.mouseDownGridY <= 9)) {
 
 				//Had pressed inside
-				int flags = 9, numFlags = 0;
-			
-				if(numFlags<flags){
-						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.RED;
+
+				if((myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.WHITE))){
+					myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.RED;				
+					myPanel.repaint();
+					flags--;
+					System.out.println("numFlags=" +flags);
+				}else{
+					if ((myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
+						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.WHITE;				
 						myPanel.repaint();
-						numFlags++;
+						flags++;
+						System.out.println("numFlags=" +flags);
+					}
 				}
-				
+			}
+
+			else if((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)){
+				//do nothing 
 			}
 
 			break;
