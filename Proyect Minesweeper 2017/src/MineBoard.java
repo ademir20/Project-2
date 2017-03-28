@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class MineBoard {
 	
-	int mines = 9;
+	int mines = 10;
 	
 	Mine[] Mines = new Mine[mines];
 

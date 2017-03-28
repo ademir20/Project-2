@@ -19,7 +19,8 @@ import javax.swing.JFrame;
 public class MyMouseAdapter extends MouseAdapter {
 
 	private Random generator = new Random();
-
+	public MineBoard mineboard;
+	
 	public void mousePressed(MouseEvent e) {
 
 		switch (e.getButton()) {
@@ -193,14 +194,15 @@ public class MyMouseAdapter extends MouseAdapter {
 					} else {
 
 						//Released the mouse button on the same cell where it was pressed
-						//						if(!DoesBombExist){
-					if (!(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
-						Color newColor = Color.GREEN; //No permitir que el verde pinte encima del rojo (un flag)
-						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;}
+						
+						//if(mineboard. ){
+							if (!(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
+								Color newColor = Color.GREEN; //No permitir que el verde pinte encima del rojo (un flag)
+								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;}
 
-						myPanel.repaint();
+							myPanel.repaint();
 
-						//						}
+						//}
 
 					}
 
@@ -260,7 +262,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 				//Had pressed inside
 
-				if((myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.WHITE))){
+				if((myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.WHITE) && flags>0)){
 					myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.RED;	//Solo permite crear flags en cuadrados blancos			
 					myPanel.repaint();
 					flags--; //Por cada right click en cuadrado blanco pones un flag blanco por ende hay menos flags disponibles para minas
