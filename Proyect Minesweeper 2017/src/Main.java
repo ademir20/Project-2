@@ -10,7 +10,8 @@ public class Main   {
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
 		myFrame.setSize(400, 400);
-
+		
+		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
 		MyPanel myPanel = new MyPanel();
 		myFrame.add(myPanel);
 		
@@ -28,9 +29,11 @@ public class Main   {
 			// Display Bombs Locations
 			System.out.println("Bomb location at [" + mineboard.Mines[counter].Row + "] [" + mineboard.Mines[counter].Col + "]");					
 			counter ++;
+			
+			
 		}
 		
-		MyMouseAdapter myMouseAdapter = new MyMouseAdapter();
+		
 		myMouseAdapter.mineboard = mineboard;
 		myFrame.addMouseListener(myMouseAdapter);		
 		

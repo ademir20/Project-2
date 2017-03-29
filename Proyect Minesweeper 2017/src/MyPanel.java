@@ -117,4 +117,9 @@ public class MyPanel extends JPanel {
 		}
 		return y;
 	}
+	
+	public int getInnerCellSize()
+	{
+		return INNER_CELL_SIZE;
+	}
 }

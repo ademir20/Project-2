@@ -20,8 +20,8 @@ public class MineBoard {
 		while(numberMines < 10) //create the mines
 		{			
 			// Cols and rows
-			int rowX = generator.nextInt(10);
-			int colY = generator.nextInt(10);
+			int rowX = generator.nextInt(8);
+			int colY = generator.nextInt(8);
 			
 			
 					

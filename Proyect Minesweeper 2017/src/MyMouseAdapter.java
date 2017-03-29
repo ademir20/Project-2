@@ -1,5 +1,6 @@
 import java.awt.Color;
 
+
 import java.awt.Component;
 
 import java.awt.Insets;
@@ -13,6 +14,8 @@ import java.util.Random;
 
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 
@@ -20,7 +23,10 @@ public class MyMouseAdapter extends MouseAdapter {
 
 	private Random generator = new Random();
 	public MineBoard mineboard;
-	
+	public Mine mine;
+
+	boolean winGame = false;
+
 	public void mousePressed(MouseEvent e) {
 
 		switch (e.getButton()) {
@@ -123,8 +129,10 @@ public class MyMouseAdapter extends MouseAdapter {
 		}
 
 	}
-	int flags = 10, numFlags = 0; //flags = Flags used
-								  //numFlags = Flags available for mines
+	int flags = 10, numFlags = 0; 
+
+	//flags = Flags used
+	//numFlags = Flags available for mines
 
 	public void mouseReleased(MouseEvent e) {
 
@@ -194,15 +202,47 @@ public class MyMouseAdapter extends MouseAdapter {
 					} else {
 
 						//Released the mouse button on the same cell where it was pressed
-						
-						//if(mineboard. ){
-							if (!(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
-								Color newColor = Color.GREEN; //Won't allow to paint green on top of a flag(only on white cells)
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;}
 
-							myPanel.repaint();
+						mine = new Mine(gridX, gridY);
 
-						//}
+						//Navigate through grid
+						for(int count=0; count<10; count++){
+							//Loosing logic
+							if(mineboard.Mines[count].HasBomb(gridX, gridY)){
+								for(int i=0; i<9; i++){
+									for(int j=0; j<9; j++){
+										myPanel.colorArray[gridX][gridY] = Color.BLACK;	
+										myPanel.repaint();
+									}
+								}
+									
+								System.out.println("Bomb " +count+ " at position [" +gridX+ "] [" +gridY+ "]. YOU LOSE!!! GAME OVER");
+								JOptionPane.showMessageDialog(null, "Game over!!", "InfoBox: " + "It's the end", JOptionPane.INFORMATION_MESSAGE);
+								myPanel.repaint();
+								System.exit(0);
+
+							}
+							
+						}			
+												
+			
+						int numBombs = mineboard.NumberAdyacentBombs(gridX, gridY);
+
+						//Label with numbers near bombs 
+						JLabel label = new JLabel(Integer.toString(numBombs));
+						label.setSize(25, 25);
+						label.setLocation(gridX*(myPanel.getInnerCellSize()+1)+33, gridY*(myPanel.getInnerCellSize()+1)+27);
+						myPanel.add(label);
+
+
+						if (!(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED))){
+							Color newColor = Color.GRAY; //Won't allow to paint green on top of a flag(only on white cells)
+							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;}
+
+
+						myPanel.repaint();
+
+
 
 					}
 
